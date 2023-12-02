@@ -3,7 +3,7 @@ import { resolve as path } from 'path';
 import { EOL } from 'os';
 
 const main = () => {
-    const input: string = readFileSync(path(__dirname, './01.1.input.txt'), { encoding: 'utf8' });
+    const input: string = readFileSync(path(__dirname, './01.input.txt'), { encoding: 'utf8' });
     const lines: string[] = input.split(EOL);
     const numbers: number[] = [];
     for (const line of lines) {
