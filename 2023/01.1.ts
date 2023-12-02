@@ -10,11 +10,11 @@ const main = () => {
         let number: number = 0;
         const searching: boolean[] = [true, true];
         for (let i = 0; i < line.length; i++) {
-            if (searching[0] && line[i] == line[i].toUpperCase()) {
+            if (searching[0] && !isNaN(+line[i])) {
                 number += +line[i] * 10;
                 searching[0] = false;
             }
-            if (searching[1] && line[line.length - i - 1] == line[line.length - i - 1].toUpperCase()) {
+            if (searching[1] && !isNaN(+line[line.length - i - 1])) {
                 number += +line[line.length - i - 1];
                 searching[1] = false;
             }
