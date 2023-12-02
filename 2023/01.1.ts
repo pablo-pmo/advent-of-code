@@ -18,7 +18,7 @@ const main = () => {
                 number += +line[line.length - i - 1];
                 searching[1] = false;
             }
-            if (searching.every((search: boolean) => !search)) {
+            if (!searching[0] && !searching[1]) {
                 numbers.push(number);
                 break;
             }
