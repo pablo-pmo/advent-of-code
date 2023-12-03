@@ -9,7 +9,7 @@ const main = () => {
     for (const line of lines) {
         let number: number = 0;
         const searching: boolean[] = [true, true];
-        for (let i = 0; i < line.length; i++) {
+        for (let i: number = 0; i < line.length; i++) {
             if (searching[0] && !isNaN(+line[i])) {
                 number += +line[i] * 10;
                 searching[0] = false;
@@ -24,7 +24,7 @@ const main = () => {
             }
         }
     }
-    const result: number = numbers.reduce((acc, curr) => acc + curr);
+    const result: number = numbers.reduce((acc: number, curr: number) => acc + curr);
     console.log(result);
 
 };

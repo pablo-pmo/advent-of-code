@@ -27,8 +27,8 @@ const main = () => {
     const results: number[] = [];
     for (let line of lines) {
 
-        const first = numbers.reduce(
-            (acc, curr) => {
+        const first: StrNumber = numbers.reduce(
+            (acc: StrNumber, curr: StrNumber) => {
                 const where = line.indexOf(curr.text);
                 if (where === -1 || acc.where! < where) return acc;
                 return { ...curr, where };
@@ -37,8 +37,8 @@ const main = () => {
             line = line.replace(first.text, first.value);
         }
 
-        const last = numbers.reduce(
-            (acc, curr) => {
+        const last: StrNumber = numbers.reduce(
+            (acc: StrNumber, curr: StrNumber) => {
                 const where = line.lastIndexOf(curr.text);
                 if (where === -1 || acc.where! > where) return acc;
                 return { ...curr, where };
@@ -49,7 +49,7 @@ const main = () => {
 
         let number: number = 0;
         const searching: boolean[] = [true, true];
-        for (let i = 0; i < line.length; i++) {
+        for (let i: number = 0; i < line.length; i++) {
             if (searching[0] && !isNaN(+line[i])) {
                 number += +line[i] * 10;
                 searching[0] = false;
@@ -64,7 +64,7 @@ const main = () => {
             }
         }
     }
-    const result: number = results.reduce((acc, curr) => acc + curr);
+    const result: number = results.reduce((acc: number, curr: number) => acc + curr);
     console.log(result);
 
 };
