@@ -30,7 +30,7 @@ const main = () => {
         ];
 
         let peeks: [number, string][] = neighbours.map((neighbour: number): [number, string] => [neighbour, input[neighbour]]);
-        peeks = peeks.filter(([_, char]: [number, string]): boolean => ![c, '.'].includes(char));
+        peeks = peeks.filter(([_, char]: [number, string]): boolean => !isNaN(+char));
 
         peeks.forEach(([peek, _]: [number, string]) => {
 
