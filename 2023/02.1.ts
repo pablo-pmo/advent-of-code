@@ -14,13 +14,12 @@ const main = () => {
 
     let sum = 0;
     for (const line of lines) {
-        let [id, plays]: string[] = line.split(': ');
-        id = id.replace(/Game /, '');
+        const [id, plays]: string[] = line.split(': ');
 
-        let illegalPlays: string[] = plays.split('; ').map((play: string): string[] => play.split(', ').filter(checkColourCount)).flat();
+        const illegalPlays: string[] = plays.split('; ').map((play: string): string[] => play.split(', ').filter(checkColourCount)).flat();
 
         if (illegalPlays.length > 0) continue;
-        sum += +id;
+        sum += +id.replace(/Game /, '');
     }
     console.log(sum);
 

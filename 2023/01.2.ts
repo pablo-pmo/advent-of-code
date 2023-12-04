@@ -24,7 +24,7 @@ const main = () => {
     ];
 
     const lines: string[] = input.split(EOL);
-    const results: number[] = [];
+    let sum: number = 0;
     for (let line of lines) {
 
         const first: StrNumber = numbers.reduce(
@@ -59,13 +59,12 @@ const main = () => {
                 searching[1] = false;
             }
             if (!searching[0] && !searching[1]) {
-                results.push(number);
+                sum += number;
                 break;
             }
         }
     }
-    const result: number = results.reduce((acc: number, curr: number): number => acc + curr);
-    console.log(result);
+    console.log(sum);
 
 };
 

@@ -16,7 +16,7 @@ const main = () => {
             colourCount[text] = +amount;
         }
 
-        let [_, plays]: string[] = line.split(': ');
+        const [_, plays]: string[] = line.split(': ');
 
         plays.split('; ').forEach((play: string) => play.split(', ').forEach(checkColourCount));
 
