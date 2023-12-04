@@ -7,7 +7,7 @@ const main = () => {
     const lines: string[] = input.split(EOL);
 
     const colourCount: { [key: string]: number } = { red: 12, green: 13, blue: 14 };
-    const checkColourCount = (line: string) => {
+    const checkColourCount = (line: string): boolean => {
         const [amount, text] = line.split(' ');
         return colourCount[text] < +amount;
     }
