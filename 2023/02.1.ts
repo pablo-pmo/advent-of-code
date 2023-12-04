@@ -14,7 +14,7 @@ const main = () => {
 
     let sum = 0;
     for (const line of lines) {
-        let [id, plays] = line.split(':');
+        let [id, plays] = line.split(': ');
         id = id.replace(/Game /, '');
 
         let illegalPlays: string[] = plays.split('; ').map((play: string) => play.split(', ').filter(checkColourCount)).flat();
