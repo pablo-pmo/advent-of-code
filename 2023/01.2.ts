@@ -28,8 +28,8 @@ const main = () => {
     for (let line of lines) {
 
         const first: StrNumber = numbers.reduce(
-            (acc: StrNumber, curr: StrNumber) => {
-                const where = line.indexOf(curr.text);
+            (acc: StrNumber, curr: StrNumber): StrNumber => {
+                const where: number = line.indexOf(curr.text);
                 if (where === -1 || acc.where! < where) return acc;
                 return { ...curr, where };
             }, { text: '', value: '0', where: line.length });
@@ -38,8 +38,8 @@ const main = () => {
         }
 
         const last: StrNumber = numbers.reduce(
-            (acc: StrNumber, curr: StrNumber) => {
-                const where = line.lastIndexOf(curr.text);
+            (acc: StrNumber, curr: StrNumber): StrNumber => {
+                const where: number = line.lastIndexOf(curr.text);
                 if (where === -1 || acc.where! > where) return acc;
                 return { ...curr, where };
             }, { text: '', value: '0', where: -1 });
@@ -48,7 +48,7 @@ const main = () => {
         }
 
         let number: number = 0;
-        const searching: boolean[] = [true, true];
+        const searching: [boolean, boolean] = [true, true];
         for (let i: number = 0; i < line.length; i++) {
             if (searching[0] && !isNaN(+line[i])) {
                 number += +line[i] * 10;
@@ -64,7 +64,7 @@ const main = () => {
             }
         }
     }
-    const result: number = results.reduce((acc: number, curr: number) => acc + curr);
+    const result: number = results.reduce((acc: number, curr: number): number => acc + curr);
     console.log(result);
 
 };

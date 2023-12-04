@@ -11,14 +11,14 @@ const main = () => {
 
         const colourCount: { [key: string]: number } = { red: 0, green: 0, blue: 0 };
         const checkColourCount = (line: string) => {
-            const [amount, text] = line.split(' ');
+            const [amount, text]: string[] = line.split(' ');
             if (+amount < colourCount[text]) return;
             colourCount[text] = +amount;
         }
 
-        let [_, plays] = line.split(': ');
+        let [_, plays]: string[] = line.split(': ');
 
-        plays.split('; ').map((play: string) => play.split(', ').forEach(checkColourCount));
+        plays.split('; ').forEach((play: string) => play.split(', ').forEach(checkColourCount));
 
         sum += colourCount.red * colourCount.green * colourCount.blue;
     }
