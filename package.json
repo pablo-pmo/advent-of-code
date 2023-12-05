@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "My attempt at @topaz 's Advent of Code",
   "scripts": {
-    "start": "ts-node 2023/04.1.ts",
+    "start": "ts-node 2023/04.2.ts",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
