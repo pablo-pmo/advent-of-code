@@ -10,9 +10,7 @@ const main = () => {
     let seeds: [number, number][] = [];
 
     while (origin.length > 1) {
-        const start: number = origin.shift()!;
-        const end: number = start + origin.shift()! - 1;
-        seeds.push([start, end]);
+        seeds.push([origin.shift()!, origin.shift()!]);
     }
 
     console.log(seeds);
