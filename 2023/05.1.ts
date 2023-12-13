@@ -13,7 +13,7 @@ const main = () => {
         const [_, ...transformations]: number[][] = line.split(EOL).map((transformation: string): number[] => transformation.split(' ').map((text: string): number => +text));
 
         seeds = seeds.map((seed: number): number => {
-            const transformation: number[] | undefined = transformations.filter((transformation: number[]): boolean => (seed >= transformation[1]) && (seed < (transformation[1] + transformation[2]))).shift();
+            const transformation: number[] | undefined = transformations.filter(([_, source, length]: number[]): boolean => (seed >= source) && (seed < (source + length))).shift();
             if (transformation !== undefined) return transformation[0] + seed - transformation[1];
             return seed;
         });
