@@ -10,11 +10,11 @@ const main = () => {
 
     for (const line of lines) {
 
-        const [_, ...transformations]: number[][] = line.split(EOL).map((transformation: string): number[] => transformation.split(' ').map((text: string): number => +text));
+        const [_, ...maps]: number[][] = line.split(EOL).map((map: string): number[] => map.split(' ').map((text: string): number => +text));
 
         seeds = seeds.map((seed: number): number => {
-            const transformation: number[] | undefined = transformations.filter(([_, source, length]: number[]): boolean => (seed >= source) && (seed < (source + length))).shift();
-            if (transformation !== undefined) return transformation[0] + seed - transformation[1];
+            const map: number[] | undefined = maps.filter(([_, source, length]: number[]): boolean => (seed >= source) && (seed < (source + length))).shift();
+            if (map !== undefined) return map[0] + seed - map[1];
             return seed;
         });
 
