@@ -19,14 +19,14 @@ const main = () => {
 
     for (const line of lines) {
 
-        let [_, ...transformations]: number[][] = line.split(EOL).map((transformation: string): number[] => transformation.split(' ').map((text: string): number => +text));
+        let [_, ...maps]: number[][] = line.split(EOL).map((map: string): number[] => map.split(' ').map((text: string): number => +text));
 
-        console.log(transformations);
+        console.log(maps);
 
-        transformations = transformations.filter(([_, tStart, tLength]: number[]): boolean => seeds.some(([sStart, sLength]: [number, number]): boolean => ((tStart <= sStart) && (tStart + tLength >= sStart)) || ((sStart <= tStart) && (sStart + sLength >= tStart))));
+        maps = maps.filter(([_, mStart, mLength]: number[]): boolean => seeds.some(([sStart, sLength]: [number, number]): boolean => ((mStart <= sStart) && (mStart + mLength >= sStart)) || ((sStart <= mStart) && (sStart + sLength >= mStart))));
 
 
-        console.log(transformations);
+        console.log(maps);
         // seeds = seeds.map((seed: number): number => {
         //     const transformation: number[] | undefined = transformations.filter((transformation: number[]): boolean => (seed >= transformation[1]) && (seed < (transformation[1] + transformation[2]))).shift();
         //     if (transformation !== undefined) return transformation[0] + seed - transformation[1];
