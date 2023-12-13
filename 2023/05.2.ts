@@ -9,11 +9,12 @@ const main = () => {
     let origin: number[] = lines.shift()!.replace('seeds: ', '').split(' ').map((seed: string): number => +seed);
     let seeds: [number, number][] = [];
 
-    for (let i: number = 0; i < origin.length; i += 2) {
-        seeds.push([origin[i], origin[i] + origin[i + 1] - 1]);
+    while (origin.length > 1) {
+        const start: number = origin.shift()!;
+        const end: number = start + origin.shift()! - 1;
+        seeds.push([start, end]);
     }
 
-    console.log(origin);
     console.log(seeds);
 
 
