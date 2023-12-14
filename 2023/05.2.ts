@@ -7,15 +7,16 @@ const main = () => {
     const lines: string[] = input.split(EOL + EOL);
 
     let origin: number[] = lines.shift()!.replace('seeds: ', '').split(' ').map((seed: string): number => +seed);
-    let seeds: [number, number][] = [];
+    let sources: [number, number][] = [];
+    let destinations: [number, number][] = [];
 
     while (origin.length > 1) {
         const start: number = origin.shift()!;
         const end: number = start + origin.shift()! - 1;
-        seeds.push([start, end]);
+        sources.push([start, end]);
     }
 
-    console.log(seeds);
+    const isSeedRelatedToMap = ([mStart, mEnd, _]: [number, number, number?], [sStart, sEnd]: [number, number]): boolean => ((mStart <= sStart) && (mEnd >= sStart)) || ((sStart <= mStart) && (sEnd >= mStart));
 
 
 
@@ -23,13 +24,23 @@ const main = () => {
 
         const [_, ...transformations]: number[][] = line.split(EOL).map((map: string): number[] => map.split(' ').map((text: string): number => +text));
 
-        let maps: [number, number, number][] = transformations.map(([destination, start, length]: number[]): [number, number, number] => [start, start + length - 1, destination]);
+        let maps: [number, number, number][] = transformations.map(([destination, start, length]: number[]): [number, number, number] => [start, start + length - 1, destination - start]);
 
+        console.log(sources);
         console.log(maps);
 
-        maps = maps.filter(([mStart, mEnd, _]: [number, number, number]): boolean => seeds.some(([sStart, sEnd]: [number, number]): boolean => ((mStart <= sStart) && (mEnd >= sStart)) || ((sStart <= mStart) && (sEnd >= mStart))));
+        maps = maps.filter((map: [number, number, number]): boolean => sources.some((source: [number, number]): boolean => isSeedRelatedToMap(map, source)));
+
+        maps.forEach(([mStart, mEnd, diff]: [number, number, number]) => {
+            sources.filter((source: [number, number]): boolean => isSeedRelatedToMap([mStart, mEnd], source)).forEach(([sStart, sEnd]: [number, number]) => {
+                const start: number = mStart > sStart ? mStart : sStart;
+                const end: number = mEnd < sEnd ? mEnd : sEnd;
+                destinations.push([start + diff, end + diff]);
+            })
+        })
 
         console.log(maps);
+        console.log(destinations);
         // seeds = seeds.map((seed: number): number => {
         //     const transformation: number[] | undefined = transformations.filter((transformation: number[]): boolean => (seed >= transformation[1]) && (seed < (transformation[1] + transformation[2]))).shift();
         //     if (transformation !== undefined) return transformation[0] + seed - transformation[1];
