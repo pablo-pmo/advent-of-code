@@ -10,7 +10,9 @@ const main = () => {
     let seeds: [number, number][] = [];
 
     while (origin.length > 1) {
-        seeds.push([origin.shift()!, origin.shift()!]);
+        const start: number = origin.shift()!;
+        const end: number = start + origin.shift()! - 1;
+        seeds.push([start, end]);
     }
 
     console.log(seeds);
@@ -19,12 +21,13 @@ const main = () => {
 
     for (const line of lines) {
 
-        let [_, ...maps]: number[][] = line.split(EOL).map((map: string): number[] => map.split(' ').map((text: string): number => +text));
+        const [_, ...transformations]: number[][] = line.split(EOL).map((map: string): number[] => map.split(' ').map((text: string): number => +text));
+
+        let maps: [number, number, number][] = transformations.map(([destination, start, length]: number[]): [number, number, number] => [start, start + length - 1, destination]);
 
         console.log(maps);
 
-        maps = maps.filter(([_, mStart, mLength]: number[]): boolean => seeds.some(([sStart, sLength]: [number, number]): boolean => ((mStart <= sStart) && (mStart + mLength >= sStart)) || ((sStart <= mStart) && (sStart + sLength >= mStart))));
-
+        maps = maps.filter(([mStart, mEnd, _]: [number, number, number]): boolean => seeds.some(([sStart, sEnd]: [number, number]): boolean => ((mStart <= sStart) && (mEnd >= sStart)) || ((sStart <= mStart) && (sEnd >= mStart))));
 
         console.log(maps);
         // seeds = seeds.map((seed: number): number => {
