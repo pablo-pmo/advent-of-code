@@ -33,13 +33,46 @@ const main = () => {
 
         sort(maps);
 
-        maps.forEach(([mStart, mEnd, diff]: [number, number, number]) => {
-            sources.filter((source: [number, number]): boolean => isSeedRelatedToMap([mStart, mEnd], source)).forEach(([sStart, sEnd]: [number, number]) => {
-                const start: number = mStart > sStart ? mStart : sStart;
-                const end: number = mEnd < sEnd ? mEnd : sEnd;
-                destinations.push([start + diff, end + diff]);
-            })
-        })
+        console.log(sources);
+        console.log(maps);
+
+        while (sources.length > 0) {
+
+            const [sStart, sEnd]: [number, number] = sources[0];
+            const [mStart, mEnd, diff]: [number, number, number] = maps[0] //|| [Infinity];
+
+            if (sStart < mStart) {
+                const start: number = sStart;
+                const end: number = sEnd < mStart ? sEnd : mStart - 1;
+                destinations.push([start, end]);
+            }
+            // if (mStart === Infinity) {
+            //     sources.shift();
+            //     continue;
+            // }
+            const start: number = mStart > sStart ? mStart : sStart;
+            const end: number = mEnd < sEnd ? mEnd : sEnd;
+            destinations.push([start + diff, end + diff]);
+            if (end === sEnd) {
+                sources.shift();
+            }
+            console.log(destinations);
+
+        }
+
+        console.log(destinations);
+
+
+        sources = destinations;
+        destinations = [];
+
+        // maps.forEach(([mStart, mEnd, diff]: [number, number, number]) => {
+        //     sources.filter((source: [number, number]): boolean => isSeedRelatedToMap([mStart, mEnd], source)).forEach(([sStart, sEnd]: [number, number]) => {
+        //         const start: number = mStart > sStart ? mStart : sStart;
+        //         const end: number = mEnd < sEnd ? mEnd : sEnd;
+        //         destinations.push([start + diff, end + diff]);
+        //     })
+        // })
 
         // console.log(maps);
         // console.log(destinations);
