@@ -18,18 +18,20 @@ const main = () => {
 
     const isSeedRelatedToMap = ([mStart, mEnd, _]: [number, number, number?], [sStart, sEnd]: [number, number]): boolean => ((mStart <= sStart) && (mEnd >= sStart)) || ((sStart <= mStart) && (sEnd >= mStart));
 
+    const sort = (arr: [number, number, number?][]) => arr.sort(([a]: [number, number, number?], [b]: [number, number, number?]): number => a > b ? 1 : -1);
 
 
     for (const line of lines) {
+
+        sort(sources);
 
         const [_, ...transformations]: number[][] = line.split(EOL).map((map: string): number[] => map.split(' ').map((text: string): number => +text));
 
         let maps: [number, number, number][] = transformations.map(([destination, start, length]: number[]): [number, number, number] => [start, start + length - 1, destination - start]);
 
-        console.log(sources);
-        console.log(maps);
-
         maps = maps.filter((map: [number, number, number]): boolean => sources.some((source: [number, number]): boolean => isSeedRelatedToMap(map, source)));
+
+        sort(maps);
 
         maps.forEach(([mStart, mEnd, diff]: [number, number, number]) => {
             sources.filter((source: [number, number]): boolean => isSeedRelatedToMap([mStart, mEnd], source)).forEach(([sStart, sEnd]: [number, number]) => {
@@ -39,8 +41,8 @@ const main = () => {
             })
         })
 
-        console.log(maps);
-        console.log(destinations);
+        // console.log(maps);
+        // console.log(destinations);
         // seeds = seeds.map((seed: number): number => {
         //     const transformation: number[] | undefined = transformations.filter((transformation: number[]): boolean => (seed >= transformation[1]) && (seed < (transformation[1] + transformation[2]))).shift();
         //     if (transformation !== undefined) return transformation[0] + seed - transformation[1];
