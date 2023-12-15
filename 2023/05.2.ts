@@ -54,9 +54,12 @@ const main = () => {
             if (end === sEnd) {
                 sources.shift();
             }
-            console.log(destinations);
+            if (end === mEnd) {
+                maps.shift();
+            }
 
         }
+        console.log(destinations);
 
 
         sources = destinations;
