@@ -31,10 +31,9 @@ const main = () => {
 
         maps = maps.filter((map: [number, number, number]): boolean => sources.some((source: [number, number]): boolean => isSeedRelatedToMap(map, source)));
 
-        // if (maps.length === 0) continue;
-
         sort(maps);
 
+        console.log('------------------');
         console.log(sources);
         console.log(maps);
 
@@ -49,7 +48,7 @@ const main = () => {
             const [mStart, mEnd, diff]: [number, number, number] = maps[0];
 
             if (!isSeedRelatedToMap([mStart, mEnd], [sStart, sEnd])) {
-                destinations.push(sources.shift()!);
+                maps.shift();
                 continue;
             }
 
@@ -63,12 +62,16 @@ const main = () => {
             const start: number = Math.max(mStart, sStart);
             const end: number = Math.min(mEnd, sEnd);
             destinations.push([start + diff, end + diff]);
+            if (end === mEnd) {
+                maps.shift();
+                sources.splice(0, 1, [mEnd + 1, sEnd]);
+            }
             if (end === sEnd) {
                 sources.shift();
             }
-            if (end === mEnd) {
-                maps.shift();
-            }
+            // if (end === mEnd && end !== sEnd) {
+            //     sources.splice(0, 1, [mEnd + 1, sEnd]);
+            // }
 
         }
 
@@ -76,25 +79,14 @@ const main = () => {
         sources = destinations;
         destinations = [];
 
-        // maps.forEach(([mStart, mEnd, diff]: [number, number, number]) => {
-        //     sources.filter((source: [number, number]): boolean => isSeedRelatedToMap([mStart, mEnd], source)).forEach(([sStart, sEnd]: [number, number]) => {
-        //         const start: number = mStart > sStart ? mStart : sStart;
-        //         const end: number = mEnd < sEnd ? mEnd : sEnd;
-        //         destinations.push([start + diff, end + diff]);
-        //     })
-        // })
-
-        // console.log(maps);
-        // console.log(destinations);
-        // seeds = seeds.map((seed: number): number => {
-        //     const transformation: number[] | undefined = transformations.filter((transformation: number[]): boolean => (seed >= transformation[1]) && (seed < (transformation[1] + transformation[2]))).shift();
-        //     if (transformation !== undefined) return transformation[0] + seed - transformation[1];
-        //     return seed;
-        // });
-
     }
-    // const min: number = seeds.sort((a: number, b: number): number => a > b ? 1 : -1).shift()!;
-    // console.log(min);
+    console.log('.................')
+    console.log(sources);
+    sort(sources);
+    console.log('.................')
+    console.log(sources);
+    const min: number = sources.shift()![0];
+    console.log(min);
 
 };
 
