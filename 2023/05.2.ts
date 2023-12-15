@@ -55,13 +55,13 @@ const main = () => {
 
             if (sStart < mStart) {
                 const start: number = sStart;
-                const end: number = sEnd < mStart ? sEnd : mStart - 1;
+                const end: number = Math.min(sEnd, mStart - 1);
                 destinations.push([start, end]);
                 sources.splice(0, 1, [mStart, sEnd]);
                 continue;
             }
-            const start: number = mStart > sStart ? mStart : sStart;
-            const end: number = mEnd < sEnd ? mEnd : sEnd;
+            const start: number = Math.max(mStart, sStart);
+            const end: number = Math.min(mEnd, sEnd);
             destinations.push([start + diff, end + diff]);
             if (end === sEnd) {
                 sources.shift();
