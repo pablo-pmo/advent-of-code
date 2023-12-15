@@ -31,6 +31,8 @@ const main = () => {
 
         maps = maps.filter((map: [number, number, number]): boolean => sources.some((source: [number, number]): boolean => isSeedRelatedToMap(map, source)));
 
+        if (maps.length === 0) continue;
+
         sort(maps);
 
         console.log(sources);
@@ -39,17 +41,13 @@ const main = () => {
         while (sources.length > 0) {
 
             const [sStart, sEnd]: [number, number] = sources[0];
-            const [mStart, mEnd, diff]: [number, number, number] = maps[0] //|| [Infinity];
+            const [mStart, mEnd, diff]: [number, number, number] = maps[0];
 
             if (sStart < mStart) {
                 const start: number = sStart;
                 const end: number = sEnd < mStart ? sEnd : mStart - 1;
                 destinations.push([start, end]);
             }
-            // if (mStart === Infinity) {
-            //     sources.shift();
-            //     continue;
-            // }
             const start: number = mStart > sStart ? mStart : sStart;
             const end: number = mEnd < sEnd ? mEnd : sEnd;
             destinations.push([start + diff, end + diff]);
@@ -59,8 +57,6 @@ const main = () => {
             console.log(destinations);
 
         }
-
-        console.log(destinations);
 
 
         sources = destinations;
