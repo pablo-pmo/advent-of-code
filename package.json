@@ -1,0 +1,19 @@
+{
+  "name": "advent-of-code",
+  "version": "1.0.0",
+  "description": "My attempt at @topaz 's Advent of Code",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/pablo-pmo/adventjs.git"
+  },
+  "author": "pablo-pmo",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/pablo-pmo/adventjs/issues"
+  },
+  "homepage": "https://github.com/pablo-pmo/adventjs#readme",
+  "devDependencies": {
+    "@types/node": "^22.10.1",
+    "typescript": "^5.7.2"
+  }
+}
